@@ -1,0 +1,10 @@
+#container {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid white;
+}
+
+.columnHeader {
+    display: inline-flex;
+    width: calc(25% - 8px);
+}

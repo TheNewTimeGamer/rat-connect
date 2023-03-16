@@ -1,0 +1,11 @@
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-top: 1px solid white;
+}
+
+.column {
+    display: inline-flex;
+    width: calc(25% - 8px);
+}

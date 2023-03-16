@@ -1,0 +1,38 @@
+#container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#add {
+    display: inline-flex;
+    width: 32px;
+    height: 24px;
+    margin-left: 10px;
+    justify-content: center;
+    font-weight: 700;
+    user-select: none;
+    cursor: pointer;
+    color: limegreen;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+#add:hover {
+    color: lime;
+    background-color: grey;
+}
+
+#add:active {
+    background-color: rgb(155, 155, 155);
+}
+
+.input {
+    display: inline-flex;
+    width: 25%;
+    border: 1px solid darkgray;
+    border-radius: 4px;
+    background-color: lightgray;
+    outline: none;
+    font-weight: 600;
+}
