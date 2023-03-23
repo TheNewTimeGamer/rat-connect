@@ -56,17 +56,21 @@ class Tunnel {
         return this.accepting;
     }
 
-    public open() {
-        console.log(this.name, 'listening on port:', this.srcPort);
+    public open(onSuccess: any, onError: any) {
+        console.log('Tunnel \'' + this.name + '\' on port:', this.srcPort, 'listening for new connections.');
+        this.server.on('error', onError);
         this.server.listen(this.srcPort, ()=>{
             this.accepting = true;
+            onSuccess();
         });
     }
 
     public close() {
-        console.log(this.name, 'on port:', this.srcPort, 'closed to new connections.');
-        this.server.close();
+        this.server.close(()=>{
+            console.log('Tunnel \'' + this.name + '\' on port:', this.srcPort, 'destroyed.');
+        });
         this.accepting = false;
+        console.log('Tunnel \'' + this.name + '\' on port:', this.srcPort, 'closed to new connections.');
     }
 
     public destroy() {

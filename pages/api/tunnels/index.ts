@@ -24,10 +24,15 @@ const postTunnel = (request: NextApiRequest, response: NextApiResponse) => {
     const body = JSON.parse(request.body);
     if(!body.name || !body.srcPort || !body.destHost || !body.destPort) {
         response.status(400).send(JSON.stringify([]));
+        return;
     }
+    
     const tunnel: Tunnel = new Tunnel(body.name, parseInt(body.srcPort), body.destHost, parseInt(body.destPort));
-    tunnels.push(tunnel);
-    tunnel.open();
-    response.send(JSON.stringify(tunnels));
+    tunnel.open(()=>{
+        tunnels.push(tunnel);
+        response.status(200).send(JSON.stringify(tunnels));
+    }, (error: any)=>{
+        response.status(500).send(JSON.stringify([error]));
+    });
 };
 

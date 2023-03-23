@@ -5,7 +5,33 @@
     border-top: 1px solid white;
 }
 
+.row {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+}
+
 .column {
     display: inline-flex;
-    width: calc(25% - 8px);
+    width: 100%;
+}
+
+.delete {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 32px;
+    height: 24px;
+    margin-left: 10px;
+    justify-content: center;
+    font-weight: 700;
+    user-select: none;
+    cursor: pointer;
+    color: rgb(226, 0, 0);
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+.delete:hover {
+    color: red;
+    background-color: grey;
 }

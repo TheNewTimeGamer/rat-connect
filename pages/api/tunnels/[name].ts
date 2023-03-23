@@ -26,13 +26,14 @@ const getTunnel = (request: NextApiRequest, response: NextApiResponse) => {
 };
 
 const deleteTunnel = (request: NextApiRequest, response: NextApiResponse) => {
-    const index = tunnels.findIndex((tunnel: Tunnel) => { return tunnel.name == request.query.name });
+    const index = tunnels.findIndex((tunnel: Tunnel) => { return tunnel.name === request.query.name });
     if (index < 0) {
         response.setHeader('Content-Type', 'application/json');
         response.status(404).send(JSON.stringify([]));
         return;
     }
     tunnels.splice(index, 1)[0].destroy();
+    
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify(tunnels));
 };

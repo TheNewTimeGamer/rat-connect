@@ -5,14 +5,18 @@ import Tunnel from '@/tunneling/Tunnel';
 
 import style from './TunnelInput.module.css';
 
-const TunnelInput = () => {
+type TTunnelInput = {
+    tunnels: Tunnel[] | undefined,
+    setTunnels: Function
+}
+
+const TunnelInput = (props: TTunnelInput) => {
     const [name, setName] = React.useState<string>('');
     const [srcPort, setSrcPort] = React.useState<string>('');
     const [destHost, setDestHost] = React.useState<string>('');
     const [destPort, setDestPort] = React.useState<string>('');
 
     const handleOnClick = () => {
-        console.log('saving');
         fetch('http://localhost:3000/api/tunnels', {
             method: 'POST',
             body: JSON.stringify({
@@ -22,13 +26,15 @@ const TunnelInput = () => {
                 destPort: destPort
             })
         }).then(async (response: Response) => {
+            if(response.status >= 300) {
+                throw await response.json()
+            }
             return await response.json();
         }).then((tunnels: Tunnel[]) => {
-            console.log(tunnels);
+            props.setTunnels(tunnels);
         }).catch((error: Error) => {
             console.error(error);
         });
-        return undefined;
     }
 
     return (
